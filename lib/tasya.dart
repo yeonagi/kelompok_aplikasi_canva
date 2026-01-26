@@ -25,7 +25,6 @@ class CanvaHomePage extends StatelessWidget {
     return Scaffold(
       body: Container(
         decoration: const BoxDecoration(
-          // Background gradasi atas seperti di gambar
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
@@ -36,21 +35,51 @@ class CanvaHomePage extends StatelessWidget {
         child: SafeArea(
           child: CustomScrollView(
             slivers: [
-              // Header Bagian Atas
+              // ===== HEADER =====
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.all(20.0),
                   child: Column(
                     children: [
-                      const Text(
-                        "What will you learn today?",
-                        style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
+                      // Avatar + Title
+                      Stack(
+                        alignment: Alignment.center,
+                        children: [
+                          // Avatar akun kiri atas
+                          Align(
+                            alignment: Alignment.centerLeft,
+                            child: Container(
+                              padding: const EdgeInsets.all(2),
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                border: Border.all(
+                                  color: Colors.purpleAccent,
+                                  width: 1.5,
+                                ),
+                              ),
+                              child: const CircleAvatar(
+                                radius: 16,
+                                backgroundImage: AssetImage(
+                                  'assets/images/adji.jpeg',
+                                ),
+                              ),
+                            ),
+                          ),
+
+                          // Judul tengah
+                          const Text(
+                            "What will you learn today?",
+                            style: TextStyle(
+                              fontSize: 24,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ],
                       ),
+
                       const SizedBox(height: 20),
+
                       // Search Bar
                       Container(
                         padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -74,15 +103,15 @@ class CanvaHomePage extends StatelessWidget {
                 ),
               ),
 
-              // Grid Menu Ikon
+              // ===== GRID MENU =====
               SliverPadding(
                 padding: const EdgeInsets.symmetric(horizontal: 5),
                 sliver: SliverGrid(
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 3, // 3 Kolom sesuai gambar
+                    crossAxisCount: 3,
                     mainAxisSpacing: 25,
                     crossAxisSpacing: 50,
-                    childAspectRatio: 1, // Menyesuaikan tinggi tiap item
+                    childAspectRatio: 1,
                   ),
                   delegate: SliverChildListDelegate([
                     _buildMenuItem(
@@ -134,7 +163,8 @@ class CanvaHomePage extends StatelessWidget {
           ),
         ),
       ),
-      // Bottom Navigation Bar
+
+      // ===== BOTTOM NAVIGATION =====
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: const Color(0xFF181818),
         selectedItemColor: Colors.white,
@@ -159,8 +189,8 @@ class CanvaHomePage extends StatelessWidget {
     );
   }
 
-  // Widget Helper untuk membuat Ikon Menu
-  Widget _buildMenuItem(
+  // ===== HELPER MENU ITEM =====
+  static Widget _buildMenuItem(
     IconData icon,
     String label,
     Color color, {
